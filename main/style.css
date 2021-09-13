@@ -64,8 +64,9 @@ body {
     margin-top: 10px;
     font-family: Ubuntu Mono;
     color: yellow;
-    font-size: 15px;
+    font-size: 10px;
     margin-bottom: 10px;
+    text-alint: center;
 }
 
 .right a {
