@@ -1,0 +1,272 @@
+<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+</head>
+<body>
+    <!----------------------------------------------------------------------------------------->
+        <div align="center" class="googleads">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3042367879394428"
+             crossorigin="anonymous"></script>
+        <!-- iamrushi.com side ad's -->
+        <ins class="adsbygoogle"
+             style="display:block;width:200px; height:100px; z-index: 2; margin-left: 180vh; position: fixed;"
+             data-ad-client="ca-pub-3042367879394428"
+             data-ad-slot="9757533655"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+
+    <!----------------------------------------------------------------------------------------->
+
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+    
+
+<div class="content" id="content">
+    <div class="blog-nmap">
+
+        <h1>Gobuster - Directory Scanning Tool</h1>
+        <p style="font-size: 9px; color: lightgreen; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <p>Gobuster is a tool used to brute-force on URLs (directories and files) in websites and DNS subdomains.<p>
+        <p><b>Common Parameters</b></p>
+        <p>-fw &ndash; force processing of a domain with wildcard results.<br>
+        -np &ndash; hide the progress output.<br>
+        -m <mode> &ndash; which mode to use, either dir or dns (default: dir).<br>
+        -q &ndash; disables banner/underline output.<br>
+        -t <threads> &ndash; number of threads to run (default: 10).<br>
+        -u <url/domain> &ndash; full URL (including scheme), or base domain name.<br>
+        -v &ndash; verbose output (show all results).<br>
+        -w <wordlist> &ndash; path to the wordlist used for brute forcing (use &ndash; for stdin).</p>
+        
+        <p><b>Dir mode Parameter</b></p>
+        <p>-a <user agent string> &ndash; specify a user agent string to send in the request header.<br>
+        -c &ndash; use this to specify any cookies that you might need (simulating auth).<br>
+        -e &ndash; specify the extended mode that renders the full URL.<br>
+        -f &ndash; append / for directory brute forces.<br>
+        -k &ndash; Skip verification of SSL certificates.<br>
+        -l &ndash; show the length of the response.<br>
+        -n &ndash; &ldquo;no status&rdquo; mode, disables the output of the result&rsquo;s status code.<br>
+        -o <file> &ndash; specify a file name to write the output to.<br>
+        -p <proxy url> &ndash; specify a proxy to use for all requests (scheme much match the URL scheme).<br>
+        -r &ndash; follow redirects.<br>
+        -s <status codes> &ndash; comma-separated set of the list of status codes to be deemed a &ldquo;positive&rdquo; (default: 200,204,301,302,307).<br>
+        -x <extensions> &ndash; list of extensions to check for, if any.<br>
+        -P &ndash; HTTP Authorization password (Basic Auth only, prompted if missing).<br>
+        -U &ndash; HTTP Authorization username (Basic Auth only).<br>
+        -to &ndash; HTTP timeout. Examples: 10s, 100ms, 1m (default: 10s).</p>
+        <p><b>DNS mode Parameter</b></p>
+        <p>-cn &ndash; show CNAME records (cannot be used with &lsquo;-i&rsquo; option).<br>
+        -i &ndash; show all IP addresses for the result</p>
+        <img src="images/go.png">
+
+        <h2>Using Wordlist for Directory Brute-Force</h2>
+        <p>You can use -w option for using a particular wordlist, for example, common.txt or medium.txt to launch a brute-force attack for extracting web directories or files from inside the target URL.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107</br></p>
+        <p>The above command will dump the all possible files and directories with the help of common.txt wordlist.</p>
+        <img src="images/go_1.png">
+
+        <h2>Obtain Result with Specify Status Code</h2>
+        <p>Using <b>"-s flag"</b> enables the status code for specific value such as 302, 200, 403, and 404 and so on to obtain certain request pages.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107-s 302,200</br></p>
+
+        <h2>Appending Forward slash</h2>
+        <p>Using <b>"-f flag"</b>, appending the forward slash while making brute-force attack on the target URL.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107 -f </br></p>
+        <img src="images/go_2.png">
+
+        <h2>Saving Output Result inside Text File</h2>
+        <p>Using -o option enables saving output result parameter in a text file which can be useful in the future.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107 -o result.txt </br></p>
+        <p>We can ensure the result.txt file with the help of cat command</p>
+        <img src="images/go_3.png">
+
+        <h2>Scan Directory with Specific Extension List</h2>
+        <p>There are a lot of situations where we need to extract the directories of a specific extension over the target server, and then we can use the <b>-X parameter</b> of this scan. This parameter accepts the file extension name and then searches the given extension files over the target server or machine.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107 -x php</br></p>
+        <img src="images/go_4.png">
+
+        <h2>HTTP AUTHORIZATION (-u username: password)</h2>
+        <p>HTTP Authentication/Authentication mechanisms are all based on the use of 401-status code and WWW-Authenticate response header. The most widely used HTTP authentication mechanisms are Basic. The client sends the user name and password as un-encrypted base64 encoded text.</p>
+        <p>So, in order to bypass this kind of authentication with the help of Gobuster we have used the command below:</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster dir -w /usr/share/wordlists/dirb/common.txt -u http://192.168.0.107/login.php -U admin -P passwd</br></p>
+
+        <h2>DNS Mode</h2>
+        <p>Using -m option is enabled DNS mode which is effective for public network IP and extracts the sub-domains.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">gobuster -m dns -w /usr/share/wordlists/dirb/common.txt -u google.com</br></p>
+
+        <p style="font-weight: bold;">Source:</p>
+        <p style="margin-left: 12vh;">I recommend to complete Nmap lab on TryHackMe
+            <a href="https://tryhackme.com/room/easypeasyctf" style="color: indianred;">https://tryhackme.com/room/easypeasyctf</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <hr style="margin-left: 8vh;">
+    </div>
+
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+</div>
+
+<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="../main.html"><img src="../images/home.png"></a>
+            <a href="../blogs.html"><img src="../images/blogs.png"></a>
+            <a href="../writeups.html"><img src="../images/writeups.png"></a>
+            <a href="../projects.html"><img src="../images/projects.png"></a>
+            <a href="../about.html"><img src="../images/about.png"></a>
+            <li><a href="../main.html">HOME</a></li>
+            <li><a href="../blogs.html">BLOGS</a></li>
+            <li><a href="../writeups.html">WRITEUPS</a></li>
+            <li><a href="../projects.html">PROJECTS</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="../images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="../images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="../images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="../images/website.png"></a>
+    </div>
+</nav>
+
+    <img src="../images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>

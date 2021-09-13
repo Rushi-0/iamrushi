@@ -1,0 +1,228 @@
+<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+</head>
+<body>
+    <!----------------------------------------------------------------------------------------->
+        <div align="center" class="googleads">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3042367879394428"
+             crossorigin="anonymous"></script>
+        <!-- iamrushi.com side ad's -->
+        <ins class="adsbygoogle"
+             style="display:block;width:200px; height:100px; z-index: 2; margin-left: 180vh; position: fixed;"
+             data-ad-client="ca-pub-3042367879394428"
+             data-ad-slot="9757533655"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+
+    <!----------------------------------------------------------------------------------------->
+
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+    
+
+<div class="content" id="content">
+    <div class="blog-nmap">
+
+        <h1>Nmap - Network Scanner</h1>
+        <p style="font-size: 9px; color: lightgreen; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <p>Nmap is a free open-source network scanning tool. Nmap is used to discover hosts and services on a computer network by sending packets and analyzing the responses. Nmap provides a number of features for probing computer networks, including host discovery and service and operating system detection.Nmap runs on all major computer operating systems, and official binary packages are available for Linux, Windows, and Mac OS X. For more info visit <a href="https://nmap.org/" style="text-decoration: none; color: indianred;" >nmap.org</a>.<p>
+
+        <h2>Host Scan</h2>
+        <p>Host scan is used by penetration tester to identify active host in a network by sending ARP request packets to all system in that network. As result it will show a message "Host is up" by receiving MAC address from each active host.</p>
+
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">nmap -sP "Target IP range"<br>nmap -sn "Target IP range"</br></p>
+        <p>Above syntax describes how to execute a host scan, to discover live hosts in a network by using Nmap. In Kali Linux nmap is already installed so you just need to open your terminal and type the following command. </p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">nmap -sP 192.1612.0.1-255</p>
+        <p>In this screenshot you can observe that all the available hosts are show in the result with their local ip and mac address</p>
+        <img src="images/nmap_1.png">
+
+        <h2>Port Scan /TCP scan</h2> 
+        <p>So here comes the main part "Port Scanning", If you want to identify that which ports are open on the target network or machine then you should go with the nmap port scan.</p>
+        <p style="font-weight: bold;">Port Status:</p>
+        <p style="margin-left: 12vh;">1. Open: This indicates that an application is listening for connections on this port.</p>
+        <p style="margin-left: 12vh;">2. Closed: This indicates that the probes were received but there is no application listening on this port.</p>
+        <p style="margin-left: 12vh;">3. Filtered: This indicates that the probes were not received and the state could not be established. It also indicates that the probes are being dropped by some kind of filtering.</p>
+        <p style="margin-left: 12vh;">4. Unfiltered: This indicates that the probes were received but a state could not be established.</p>
+        <p style="margin-left: 12vh;">5. Open/Filtered: This indicates that the port was filtered or open but Nmap couldn?t establish the state.</p>
+        <p style="margin-left: 12vh;">6 .Closed/Filtered: This indicates that the port was filtered or closed but Nmap couldn?t establish the state.</p>
+
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">nmap -p [port number] "target ip"<br>nmap -sT [port number] "target ip"</br></p>
+        <p>Above command will try to connect with port 120 as result if port is open then it will display state "open" as well as "service" running on that particular port.</p>
+        <img src="images/nmap_2.png">
+        <p>So as show in the above screenshot, we can see the port 120 is open and HTTP service is running on it, which is a normal webpage.We used -p flag to perform scan on a perticular port which was port 120.</p>
+
+        <h2>Port List</h2>  
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -p120,22,120120,145 192.1612.0.107<p>
+        <p>If you testers want to scan more than one port of target then you should go with Port list scan where you can add multiple ports for scanning. This scan is quite useful to identify state of multiple selected ports which also describe status "host is up" if any single port is found to be opened.</p>
+
+        <h2>Port Range</h2>
+        <p>Using port range scan you can scan a particular range of ports of target network as per your requirement. For example: I want to scan all ports between port number 1 to port number 6000 then i'll use -p1-6000. Full command shown below.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -p1-6000 192.1612.0.107</p>
+        <img src="images/nmap_3.png">
+        <p>In the screenshot above we can see the nmap scan is done in the port range between 1 to 6000 and if any ports within this range are open they are showed in the result. In our case we can see port 22,120 and 4200 are open.</p>
+        <p>If you want to scan all 65535 ports, then you should execute given below command which will enumerates the open ports of target system:</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -p- 192.1612.0.107</p>
+        <p>Basically -p- flage means all port scan and the total number of ports are 65535.</p>
+
+        <h2>Specific Port by Service name</h2>
+        <p>If you don?t known accurate port number for enumeration then you can also mention service name for port state scanning.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -p[service-name] [taregt-IP]</p>
+        <p>From given image you can observe that same result has been obtained by executing above command without referring any port number.</p>
+        <img src="images/nmap_4.png">
+        <h2>OS Detection Scan</h2>
+        <p>Apart from open port enumeration nmap is quite useful in OS fingerprinting. This scan very helpful to penetration tester in order to conclude possible security vulnerabilities and determining the available system calls to set the specific exploit payloads.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -O [taregt-IP]</p>
+        <p>Above command will dump following information:</p>
+        <p><b>Device type:</b> All fingerprints are classified with one or more high-level device types, such as router, printer, firewall, general purpose. These are further described in the section called "Device and OS classification (Class lines)". If you notice given below image here "Device Type: general purpose".</p>
+        <p><b>Running:</b> This field is also related to the OS classification scheme described in the section called "Device and OS classification (Class lines)". It shows the OS Family (Linux in this case) and OS generation if available. If there are multiple OS families, they are separated by commas. When Nmap can't narrow down OS generations to one specific choice, options are separated by the pipe symbol ("|") Examples include OpenBSD 3.X, NetBSD 3.X|4.X and Linux 2.4.X|2.5.X|2.6.X.</p>
+        <p><b>OS CPE:</b> This shows a Common Platform Enumeration (CPE) representation of the operating system when available. It may also have a CPE representation of the hardware type. OS CPE begins with cpe:/o and hardware CPE begins with cpe:/h.</p>
+        <p><b>OS details:</b> This line gives the detailed description for each fingerprint that matches. While the Device type and Running lines are from predefined enumerated lists that are easy to parse by a computer, the OS details line contains free-form data which is useful to a human reading the report. This can include more exact version numbers, device models, and architectures specific to a given fingerprint.</p>
+        <img src="images/nmap_5.png">
+        <p>In case OS detection fails, you can use the argument -osscan-guess to try to guess the operating system:</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -O --osscan-guess [taregt-IP]</p>
+
+        <h2>Version Scan</h2>
+        <p>While doing vulnerability scan on network devices you really want to know what services and version are running on perticular target or network. Having can accurate version number can helps us to obtain information, known exploits and vulnerabilities. For example vsftpd service is running target machine and the version of that service is 2.3.4 and we know that this version is vulnerable to Backdoor Command Execution and we can easily exploit this service with the help of available exploits. Version scan is also categories as <b>"Banner Grabbing"</b> in penetration testing.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -sV [taregt-IP]</p>
+        <img src="images/nmap_6.png">
+        <p>From the give image you can see that it has shown current version of running service. Additional information will be enclosed in parenthesis.</p>
+
+        <h2>Fast Scan</h2>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -F [taregt-IP]</p>
+        <p>From given below image you can observe <b>scanned time: 7.212 seconds</b> where as in above scanning method [protocol scan] <b>scanned time: 0.26 seconds</b>.</p>
+        <img src="images/nmap_7.png">
+        <p>Time difference is not that much big because i am scanning locally, but there will be a huge difference if you scanned machines over WAN.</p>
+
+        <h2>Timing Tamplet Scan</h2>
+        <p>The main timing option is set through the -T parameter if you may want more control over the timing in order get the scan over and done with quicker. However, Nmap adjusts its timings automatically depending on network speed and response times of the victim</p>
+        <p>Nmap offers a simpler approach, with six timing templates. You can specify them with the -T option and their number (0-5) or their name as shown below:</p>
+        <p style="margin-left: 12vh;"><b>T0: Paranoid<br>T1: sneaky<br>T2: polite<br>T3: normal<br>T4: aggressive<br>T5: insane</b></p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -T4 [taregt-IP]</p>
+        <p>Above command will perform aggressive scan and reduce scanning timing for enumeration of target?s system, here from given below image you can observe <b>scanned time: 0.39 seconds</b>.</p>
+        <img src="images/nmap_12.png">
+
+        <h2>Exclude Scan</h2>
+        <p>There will be circumstances where host exception is required to avoid scanning of certain machines. For example i am doing nmap scanning on local hosts and i dont want to scan my host so in that case i'll use --exclude flag. So basically exclude help you to eliminate a host or list of hosts from complete network scan.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap [ip-range] --exclude [exclude-ip]</p>
+        <p>So in the command below i am scanning all ip's between ip-range 192.1612.0.1-255 expect IP 192.1612.0.109.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap 192.1612.0.1-255 --exclude 192.1612.0.109</p>
+        <img src="images/nmap_9.png">
+
+        <h2>Agressive Scan</h2>
+        <p>This option enables additional advanced and aggressive options. Presently this enables OS detection (-O), version scanning (-sV), script scanning (-sC) and traceroute (-traceroute). This option only enables features, and not timing options (such as -T4) or verbosity options (-v) that you might want as well. You can see this by using one of the following commands:</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -A [target-ip]</p>
+        <img src="images/nmap_10.png">
+        <p>As you can see in the image you will observe that the result obtain by it is the combination of multiple scan.</p>
+
+        <h2>List Scan</h2>
+        <p>When you want to scan multiple host to perform more than one scanning then ?iL option is used which support nmap to load the targets from an external file. Only you need to add all targeted IP in a text file and save it at a location.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -iL [file-path.txt]</p>
+        <p>To load the targets from the file targets.txt, the following command can be used:</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -iL /tmp/targets/ip-list.txt</p>
+        <img src="images/nmap_11.png">
+        <p style="font-weight: bold;">Inside text FIle:</p>
+        <img src="images/nmap_12.png">
+
+        <h2>Output all formats</h2>
+        <p>Sometime CLI(comman line interface) output which is on terminal is very confusing and if you wanted to impliment nmap scanning results in your writeup's, projects or reports then you might need a proper result, so with the help of -oA flage you will get output result in all formats like in .txt, .xml, .nmap, etc.</p>
+        <p style="font-weight: bold;">Syntax:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap [target-ip] -oA [output-file-location/file-name]</p>
+        <p>As you can see i stored those all inputs in a specific location by declearing path of that location and i named it as result</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap 192.1612.0.107 -oA /tmp/targets/result]</p>
+
+        <h2>Regular Scan</h2>
+        <p>Normally i preferred to perform a full scan as shown below</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh; color: lightgreen;">nmap -sC -sV -T4 -p- [target-ip] -oA [output-file-location/file-name]</p>
+        <p style="font-weight: bold;">Flags used in above command:</p>
+        <p style="margin-left: 12vh;"><b>-sC -</b>Default Scripts</p>
+        <p style="margin-left: 12vh;"><b>-sV -</b>Enumerate all versions</p>
+        <p style="margin-left: 12vh;"><b>-T4 -</b>Timing Template "aggressive"</p>
+        <p style="margin-left: 12vh;"><b>-p- -</b>All ports (65535)</p>
+        <p style="margin-left: 12vh;"><b>-oA -</b>Output all formats</p>
+        <img src="images/nmap_14.png">
+
+        <p style="font-weight: bold;">Source:</p>
+        <p style="margin-left: 12vh;">I recommend to complete Nmap lab on TryHackMe
+            <a href="https://tryhackme.com/room/furthernmap" style="color: indianred;">https://tryhackme.com/room/furthernmap</a></p>
+    <hr>
+    </div>
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+</div>
+
+<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="../main.html"><img src="../images/home.png"></a>
+            <a href="../blogs.html"><img src="../images/blogs.png"></a>
+            <a href="../writeups.html"><img src="../images/writeups.png"></a>
+            <a href="../projects.html"><img src="../images/projects.png"></a>
+            <a href="../about.html"><img src="../images/about.png"></a>
+            <li><a href="../main.html">HOME</a></li>
+            <li><a href="../blogs.html">BLOGS</a></li>
+            <li><a href="../writeups.html">WRITEUPS</a></li>
+            <li><a href="../projects.html">PROJECTS</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="../images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="../images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="../images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="../images/website.png"></a>
+    </div>
+</nav>
+
+    <img src="../images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>
