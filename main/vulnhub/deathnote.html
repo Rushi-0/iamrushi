@@ -1,0 +1,115 @@
+<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+</head>
+<body>
+
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+
+<div class="content" id="content">
+    <div class="blog-nmap">
+
+        <h1>Deathnote: 1 - Vulnhub</h1>
+        <p style="font-size: 9px; color: lightgreen; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <p>Hii guys, today today we are going to root a very easy machine from vulnhub called Deathnote. This is a very straight and forward machine need lil bit for enumeration and bruteforce, so let's hunte the ROOT.<p>
+
+        <h2>Host Discovery</h2>
+        <p>First thing first's we need to find the IP address of the machine, i am running this machine on my local network so the host discovery scan i'll be doing on my local network.As we can see in the image below, we got the target ip which is 192.168.0.104 and now lets start our enumeration.</p>
+        <img src="images/deathnote.png" style="width: 50%;">
+
+        <h2>Nmap Scan</h2>
+        <p>As always we can going to scan with default scripts, enumerate all versions, all ports, time tamplet and output our scan results in all format.</p>
+        <img src="images/deathnote_2.png">
+        <p>so as we can see in the scan results image, only two ports are open first one is 22 which is ssh and the version of ssh is 7.9p1 which is not seems to be vulnerable and second one is port 80 on which a apache server is running and the version of apache is 2.4.38 and again which not seems to be vulnerable.</p>
+
+        <h2>Web Enumeration</h2>
+        <p>Let's explore the website hosted on this server and before visiting we need to add the hosts name which is <b>deathnote.vuln</b> and ip of this machine in our hosts file as shown in the image below.</p>
+        <img src="images/deathnote_1.png">
+        <p>So as we can see in the image below this is a normal wordpress website running and there is a hint button after clicking on that it tells us to find user.txt file so i think we need to bruteforce web directories but as we know that bruteborcing web directories on wordpress website may gives us lot's of unnecessary files so i decided to look inside <b>wp-content/uploads</b> directory.</p>
+        <img src="images/deathnote_3.png" width="30%">
+        <p>and as we can see in the image below, i found 2 txt files first one is notes.txt and second one is user.txt.</p>
+        <img src="images/deathnote_4.png" width="30%">
+        <p>after looking inside both the file we get some usernames and some passwords, means we got userslist and there passwords list as shown in the image below.</p>
+        <img src="images/deathnote_5.png" width="30%" height="40%"><img src="images/deathnote_6.png" width="30%">
+
+        <h2>Brute Forcing SSH</h2>
+        <p>Now, we got the usernames and passwords but we dont know which username and password is correct to login in ssh so for that we need to brute force SSH service with hydra if if you dont know how to bruteforce with hydra then you should read my <a href="../blogs/hydra.html" style="color: indianred;"><b>blog on Hydra.</b></a></p>
+        <img src="images/deathnote_8.png" width="50%">
+        <p>so we git the username and password as shown in the image above and now we can login in in ssh  with <b>username: "l"</b> & <b>password : "death4me"</b>.</p>
+        <img src="images/deathnote_9.png" width="40%">
+
+        <h2>User Flag</h2>
+        <p>We now loginned into ssh and as shown in the image below we got the user flag but wait, it does not seems to be readable. But the encryption looks like brain-funk, i am using an online decoder there are lot od tools available to directly decrypt such types of encryptions but i prefered to use online decoders it depends on individuals choice. Decoder used <a href="https://www.dcode.fr/brainfuck-language" style="color: indianred;"><b>dcode.fr</b></a></p>
+        <img src="images/deathnote_10.png" width="50%">
+        <p>So we decrypted this encryption and it says somthing about shell and kira i dont know if it is any kind of hind or just a normal flag. Very weird flag though.</p>
+        <img src="images/deathnote_11.png" width="50%">
+
+        <h2>Root Acess</h2>
+        <p>so i tried to find SUID binaries and did lil bit of enumeration with the help of linpeas but didn't got anything jucy then i started checking each directory like var, opt, etc and i found something jucy inside /opt directory as shown in the image below.</p>
+        <img src="images/deathnote_12.png">
+        <p>I found 2 directories inside L directory and after looking inside each directory i got 2 text files after catting the 2nd text file i fot a .wav file and a text file which says use cyberchef so i transfered the .wav file on my machine using SCP.</p>
+        <img src="images/deathnote_13.png" width="50%">
+        <p>after transfering the .wav fle first i checked the type of file and it says ASCII text which means it is a text file, catting the .wav file we get hex after decoding hex we get base64 and after decoding that we get a password and i think we can use that password to switch to another user.</p>
+        <img src="images/deathnote_15.png" width="50%">
+        <p>and we are loggined into the user named kira, then first of all i checked that which commands we can run as root with sudo without password with the checl of <b>sudo -l</b> command and as shown in the image below, we can run any command as root using sudo without passwordm so now to switch to root use <b>sudo su root</b> command and waala we are root cat the root flag and we are DONE!</p>
+        <p><b>This machine was very easy and we learned how to brute force and lil bit of encryption stuff..See you guys in the next hunt BYE! :)</p>
+
+        <hr style="margin-left: 8vh;">
+    </div>
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+</div>
+
+<<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="../main.html"><img src="../images/home.png"></a>
+            <a href="../blogs.html"><img src="../images/blogs.png"></a>
+            <a href="../writeups.html"><img src="../images/writeups.png"></a>
+            <a href="../projects.html"><img src="../images/projects.png"></a>
+            <a href="../about.html"><img src="../images/about.png"></a>
+            <li><a href="../main.html">HOME</a></li>
+            <li><a href="../blogs.html">BLOGS</a></li>
+            <li><a href="../writeups.html">WRITEUPS</a></li>
+            <li><a href="../projects.html">PROJECTS</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="../images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="../images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="../images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="../images/website.png"></a>
+    </div>
+</nav>
+
+    <img src="../images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>

