@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+
+
+<div class="content" id="content">
+
+    <div class="passage">
+        <h1><a href="vulnhub/deathnote.html">Deathnote: 1 - Vulnhub</a></h1>
+        <p>It is a very easy and Straight forward box.<p>
+        <p style="font-size: 9px; color: #fff; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <a href="vulnhub/deathnote.html"><img src="images/vulnhub.png"></a>
+
+        <hr style="margin-left: 8vh;">
+        <h1><a href="vulnhub/symfonos.html">Symfonos - Vulnhub</a></h1>
+        <p>Beginner real life based machine designed to teach a interesting <br>way of obtaining a low priv shell. SHOULD work for both VMware...</br><p>
+        <p style="font-size: 9px; color: #fff; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <a href="vulnhub/symfonos.html"><img src="images/vulnhub.png"></a>
+
+        <hr style="margin-left: 8vh;">
+        <h1><a href="blogs/nmap.html">Nmap - Network Scanner</a></h1>
+        <p>Nmap is a free and open-source network scanner created<br> by Gordon Lyon Nmap is used to discover hosts and servi...</br><p>
+        <p style="font-size: 9px; color: #fff; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <a href="blogs/nmap.html"><img src="images/nmap.jpeg"></a>
+
+        <hr style="margin-left: 8vh;">
+        <h1><a href="blogs/gobuster.html">Gobuster - Directory Scanning Tool</a></h1>
+        <p>This tool used to brute-force on URLs (directories and files) in <br>websites and DNS subdomains. Gobuster can be downloaded through... </br><p>
+        <p style="font-size: 9px; color: #fff; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <a href="blogs/gobuster.html"><img src="images/gobuster.jpeg"></a>
+
+        <hr style="margin-left: 8vh;">
+        <h1><a href="blogs/hydra.html">Hydra - Bruteforcing Tool</a></h1>
+        <p>This used to brute-force username and password to different services<br>such as ftp, ssh, telnet, MS-SQL, etc...</br><p>
+        <p style="font-size: 9px; color: #fff; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <a href="blogs/hydra.html"><img src="images/hydra.png"></a>
+        <hr style="margin-left: 8vh;">
+    </div>
+
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+
+</div>
+
+<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="main.html"><img src="images/home.png"></a>
+            <a href="blogs.html"><img src="images/blogs.png"></a>
+            <a href="writeups.html"><img src="images/writeups.png"></a>
+            <a href="projects.html"><img src="images/projects.png"></a>
+            <a href="about.html"><img src="images/about.png"></a>
+            <li><a href="main.html">HOME</a></li>
+            <li><a href="blogs.html">BLOGS</a></li>
+            <li><a href="writeups.html">WRITEUPS</a></li>
+            <li><a href="projects.html">PROJECTS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="images/website.png"></a>
+    </div>
+</nav>
+
+
+    <img src="images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>

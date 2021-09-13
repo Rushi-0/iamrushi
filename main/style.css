@@ -1,0 +1,510 @@
+body {
+    margin: 0;
+    background-color:#1B1B1E;
+}
+
+.posts {
+    background-color: #0F0F0F;
+    padding: 0.1;
+    position: relative; 
+}
+.posts p {
+    color: grey;
+    margin-left: 36vh;
+    font-family: Ubuntu Mono;
+
+}
+.content{
+    margin-top: 0vh;
+    /*margin-left: 3vh;*/
+    margin-left: 28vh;
+}
+.content hr {
+    opacity: 10%;
+    width:65%;
+    margin-left: 8vh;
+}
+.passage img {
+    width: 125px;
+    height: 100px;
+    margin-left: 8.5vh;
+    margin-top: -18vh;
+    border-radius: 15px;
+    transition: 0.5s;
+}
+.passage h1 {
+    margin-left: 30vh;
+    margin-top: 5vh;
+    font-family: Ubuntu Mono;
+    font-size: 20px;
+
+}
+.passage img:hover {
+    transform: scale(1.1);
+}
+.passage a {
+    text-decoration: none;
+    color: #7CB4F8;
+}
+.passage p {
+    margin-left: 30vh;
+    font-family: Ubuntu Mono;
+    font-size: 15px;
+    color: #d6d6d6;
+}
+.passage br{
+    margin-bottom: 1em;
+}
+.passage a:hover{
+    text-decoration: underline;
+    color: #d46402;
+}
+.right {
+    margin-left: 8vh;
+    margin-top: 10px;
+    font-family: Ubuntu Mono;
+    color: yellow;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.right a {
+    text-decoration: none;
+    color: red;
+}
+.right a:hover{
+    color: #fff;
+}
+
+/*ABOUT SECTION---------------------------------------------------------------*/
+
+.about h1 {
+    margin-left: 35vh;
+    margin-top: 2vh;
+    font-family: Ubuntu Mono;
+    font-weight: bold;
+    color: #ff0000;
+    font-size: 25px;
+
+}
+.about p {
+    margin-left: 38vh;
+    color: #fff;
+    font-family: Ubuntu Mono;
+    font-size: 15px;
+}
+.about h3 {
+    margin-left: 35vh;
+    color: #ff0000;
+    font-family: Ubuntu Mono;
+}
+
+.link a {
+    text-decoration: none;
+    color: #03c2fc;
+}
+.link a:hover {
+    text-decoration: underline;
+    color: greenyellow;
+}
+.ctf img {
+    transition: all .4s;
+    transform: scale(1);
+    margin-left: 60vh; 
+    margin-top: -8vh
+}
+.ctf img:hover {
+    transform: scale(1.1);
+}
+.right hr {
+    margin-left: 50vh; 
+    width:60%;
+}
+
+
+/*================nav bar===============*/
+
+#sideNav {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0;
+    margin-left: 40vh;
+    background-color: #0F0F0F;
+    z-index: 2;
+}
+nav ul {
+    margin-top: 25vh;
+    margin-left: -8vh;
+}
+nav ul li {
+    list-style: none;
+    text-align: left;
+    margin: 35px 0px;
+    font-family: Ubuntu Mono;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 11vh;
+    transition: 0.5s;
+    transform:translateY(-242px);
+    position: relative;
+}
+nav ul li a{ 
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    opacity: 100%;
+    transition: 0.5s;
+}
+nav ul li a:hover {
+    font-size: 16px;
+}
+#menuBtn {
+    width: 40px;
+    position: fixed;
+    left: 155px;
+    top: 6px;
+    z-index: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+.media img {
+    width: 25px;
+    height: 25px;
+    margin-left: 1vh;
+    transform: translateX(25px) translateY(-120px);
+    opacity: 100%;
+    transition: 0.5s;
+}
+.media img:hover {
+    width: 40px;
+    height: 40px;
+
+}
+#sideNav ul img {
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-left: 32px;
+    z-index: 2;
+    display: block;
+    opacity: 100%;
+    transform: translateY(8px) translateX(10px);
+}
+#sideNav ul p {
+    font-size: 28px;
+    text-align: center;
+    margin-top: -30px;
+    margin-bottom: 48px;
+    font-family: Ubuntu Mono;
+    font-weight: bolder;
+}
+#sideNav ul p a{
+    text-decoration: none;
+    color: #ff0000;
+}
+/*===========================================*/
+
+/*blog---------------------------------------------*/
+
+.blog img{
+    width: 300px;
+    height: 180px;
+    margin-left: 100vh;
+    margin-top: -19vh;
+    display: none;
+}
+.blog h1 {
+    margin-left: 8vh;
+    margin-top: 5vh;
+    font-family: Ubuntu Mono;
+    font-size: 30px;
+    color: blue;
+}
+.blog p {
+    margin-left: 8vh;
+    font-family: Ubuntu Mono;
+    font-size: 16px;
+    color: #02d43a;
+}
+.blog br {
+
+}
+
+/*Blog-Nmap --------------------------------------------------------*/
+
+.blog-nmap h1 {
+    color: #7CB4F8;
+    font-family: Ubuntu Mono;
+    margin-left: 8vh;
+    margin-top: 5vh;
+    font-size: 30px;
+}
+.blog-nmap h2 {
+    color: yellow;
+    font-family: Ubuntu Mono;
+    margin-left: 8vh;
+    margin-top: 5vh;
+}
+.blog-nmap p {
+    color: white;
+    font-family: Ubuntu Mono;
+    margin-left: 8vh;
+    width: 64%;
+    line-height: 1.4;
+}
+.blog-nmap img {
+    margin-left: 8vh;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.blog-nmap img:hover {
+    transform: scale(1.02);
+}
+
+
+
+/*---------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Responsive----------------------------------------------------*/
+
+@media only screen and (max-width: 800px) {
+    
+    #sideNav {
+        margin-left: 0vh; 
+        left: -250px;
+        transition: 0.5s;
+    }
+    #menuBtn {
+        z-index: 2;
+        opacity: 100;
+        /*left: 150px;*/
+        left: 5px;
+        transition: 0.5s;
+    }
+    .posts p {
+        margin-left: 10vh;
+    }
+    .content {
+        margin-left: -8vh;
+    }
+    .content hr {
+        width: 85%;
+        margin-left: 24vh;
+    }
+    .passage img {
+        width: 100px;
+        height: 80px;
+        margin-top: -100px;
+        margin-left: 72px;
+
+    }
+    .passage h1{
+        margin-left: 23vh;
+        font-size: 18px;
+    }
+    .passage p {
+        margin-left: 23vh;
+        font-size: 10px;
+    }
+    .passage p br {
+        display: none;
+    }
+    .right {
+        font-size: 8px;
+        text-align: left;
+    }
+    .blog h1 {
+        margin-left: 10vh;
+        font-size: 18px;
+    }
+    .blog p {
+        margin-left: 10vh;
+        font-size: 10px;
+    }
+/*responsive ABOUT SECTION---------------------------------------------------------------*/
+
+.about h1 {
+    margin-left: 2vh;
+    margin-top: 2vh;
+    font-family: Ubuntu Mono;
+    font-weight: bold;
+    color: #ff0000;
+    font-size: 18px;
+
+}
+.about p {
+    margin-left: 2vh;
+    color: #fff;
+    font-family: Ubuntu Mono;
+    font-size: 12px;
+}
+.about p br {
+    display: none;
+}
+.about h3 {
+    margin-left: 2vh;
+    color: #ff0000;
+    font-family: Ubuntu Mono;
+}
+.about hr {
+    margin-left: 10vh;
+    width: 60%;
+}
+.link a {
+    text-decoration: none;
+    color: #03c2fc;
+    margin-left: -1vh;
+    font-size: 12px;
+}
+.link a:hover {
+    text-decoration: underline;
+    color: greenyellow;
+}
+.ctf img {
+    transition: all .4s;
+    transform: scale(1);
+    width: 140;
+    height: 40;
+    margin-left: 58vh; 
+    margin-top: -5vh
+}
+.ctf img:hover {
+    transform: scale(1.1);
+}
+.link p {
+    margin-left: 2vh;
+}
+.link h3 a {
+    margin-left: 0vh;
+}
+.ctf {
+    margin-left: -43vh;
+}
+.rem p {
+    margin-left: 20vh;
+}
+.right p{
+    font-size: 8px;
+    margin-left: -8vh;
+}
+.right hr {
+    width: 106%;
+    margin-left: -6vh;
+    opacity: 50%;
+}
+
+/*responsive nmap blop -----------------------------*/
+
+
+
+.blog-nmap {
+    margin-left: 2vh;
+}
+.blog-nmap h1 {
+    font-size: 22px;
+}
+.blog-nmap p {
+    font-size: 12px;
+    width: 80%;
+}
+.blog-nmap img {
+    width: 60%;
+}
+.blog-nmap hr {
+    margin-left: 8vh;
+    margin-top: 10vh;
+    width: 80%;
+}
+
+
+
+
+
+
+
+
+
+
+/*=================================*/
+
+
+}
+
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) {
+
+    .passage img {
+        width: 90px;
+        height: 65px;
+        margin-top: -90px;
+
+    }
+}
