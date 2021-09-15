@@ -1,0 +1,119 @@
+../<html>
+<head>
+    <title>I Am Rushi</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
+</head>
+<body>
+    <!----------------------------------------------------------------------------------------->
+        <div align="center" class="googleads">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3042367879394428"
+             crossorigin="anonymous"></script>
+        <!-- iamrushi.com side ad's -->
+        <ins class="adsbygoogle"
+             style="display:block;width:200px; height:100px; z-index: 2; margin-left: 180vh; position: fixed;"
+             data-ad-client="ca-pub-3042367879394428"
+             data-ad-slot="9757533655"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+
+    <!----------------------------------------------------------------------------------------->
+
+    <div class="posts">
+        <div class="posts">
+            <p>Latest Posts</p>
+        </div>
+    </div>
+    
+
+<div class="content" id="content">
+    <div class="blog-nmap">
+
+        <h1>Inclusion - TryHackMe</h1>
+        <p style="font-size: 9px; color: lightgreen; margin-top: -1vh; margin-bottom: 3vh;">Uploaded : Sept 06 2021</p>
+        <p>Hi guys, so today we are going to root a very easy machine from TryHackMe called Inclusion. This machine has a basic LFI (Local File Inclusion) vulnerability. So let's hunt the ROOT!.<p>
+
+        <h2>Nmap Scan</h2>
+        <p>As always we are going to start with nmap scan with default scripts, enumerate all versions and output all formats, here i am not using all ports flag because it will take lot of time and as per the difficulty of this machine,i will be not doing all ports scan.</p>
+        <img src="images/lfi_2.png" style="width: 50%;">
+        <p>So as show in the image above our scan is completed and we got 2 open ports first one is 22 which is ssh and second one is 80 on which some sort of website is running. Let's visit the websiite and lets see that what we can get.</p>
+
+        <h2>Web Enumeration</h2>
+        <img src="images/lfi_3.png" style="width: 50%;">
+        <p>After landing on the main page of the website i saw the 3 buttons and after click each one of them i got redirected to different pages but one thing was common which i noticed that all of the three pages were called with a php veriable named <b>"?name="</b> so i tried to read the passwd file buy just going some directories back like normally we do in any linux os <b>"/../../../../etc/passwd"</b> and we can read that file which means this php code is vulnerable to local file inclusion (LFI).</p>
+        <img src="images/lfi_5.png" style="width: 50%;">
+
+        <h2>User Flag</h2>
+        <p>Now we know that this website is vulnerable to LFI, there are several ways to convert this LFI into RCE like poisoning apache logs, ssh logs, etc. But our hint:1 says <b>"Try reading linux passwd file"</b> so lets get back to our LFI and to get a better arrenged view i'll read the source code of the passwd file and as we can see in the image below we got the username which is <b>"falconfeast"</b> and his password <b>"rootpassword"</b>, now we can login in into ssh with these creds.</p>
+        <img src="images/lfi_12.png" style="width: 50%;">
+        <p>But lets read the user flag using this LFI vulnerability soo just change the directory to<b>/../../../../home/falconfeast/user.txt</b> and we got the user flag GREAT!.</p>
+        <img src="images/lfi_8.png" style="width: 50%;">
+
+        <h2>Root Flag</h2>
+        <p>Let's login in into ssh with those creds.</p>
+        <img src="images/lfi_13.png" style="width: 50%;">
+        <p>Now we are into the target machine, so to get root access first lets see that which binary we can run as sudo without password.As show in the image below our user can run <b>socat</b> as a root user using sudo.</p>
+        <img src="images/lfi_14.png" style="width: 50%;">
+        <p>We can use<b>'socat stdin exec:/bin/sh'</b> command to break out from the restricted environment by spawning a root shell. I found this on <a href="https://gtfobins.github.io/gtfobins/socat/" style="color: indianred;">GTFOBins.</a></p>
+        <img src="images/lfi_15.png" style="width: 50%;">
+        <p>and as we can see in the image below we got the root shell. Lets cat the root flage and we are DONE!</p>
+        <img src="images/lfi_16.png" style="width: 50%;">
+        <p><b>This machine was very easy and we learned basic LFI and a very basic privilege escalation..See you guys in the next hunt BYE! :D</b></p>
+
+       <hr>
+    </div>
+    <div class="right">
+        <p>@2021<a href="https://twitter.com/Rushi0x04T7"> Rushi0x04T7. </a>Some rights reserved.</p>
+    </div>
+</div>
+
+<nav id="sideNav">
+        <ul>
+            <!-- <p><a href="../index.html">iamrushi.cf</a></p> -->
+            <a href="../main.html"><img src="../images/home.png"></a>
+            <a href="../blogs.html"><img src="../images/blogs.png"></a>
+            <a href="../writeups.html"><img src="../images/writeups.png"></a>
+            <a href="../projects.html"><img src="../images/projects.png"></a>
+            <a href="../about.html"><img src="../images/about.png"></a>
+            <li><a href="../main.html">HOME</a></li>
+            <li><a href="../blogs.html">BLOGS</a></li>
+            <li><a href="../writeups.html">WRITEUPS</a></li>
+            <li><a href="../projects.html">PROJECTS</a></li>
+            <li><a href="../about.html">ABOUT</a></li>
+        </ul>
+    <div class="media">
+        <a href="https://github.com/Rushi-0"><img src="../images/github.png"></a>
+        <a href="https://twitter.com/Rushi0x04T7"><img src="../images/twitter.png"></a>
+        <a href="https://www.instagram.com/rushi.d4runt3/"><img src="../images/instagram.png"></a>
+        <a href="https://www.iamrushi.cf/"><img src="../images/website.png"></a>
+    </div>
+</nav>
+
+    <img src="../images/menu.png" id="menuBtn">
+
+    <script>
+        var menuBtn = document.getElementById("menuBtn");
+        var sideNav = document.getElementById("sideNav");
+
+        sideNav.style.left = "-250px";
+        menuBtn.style.left = "5px"
+        menuBtn.onclick = function(){
+            if(sideNav.style.left == "-250px"){
+                sideNav.style.left = "0";
+                menuBtn.style.left = "150px"
+            }
+            else{
+                sideNav.style.left = "-250px";
+                menuBtn.style.left = "5px"
+            }
+        }
+    </script>
+
+</body>
+</html>
